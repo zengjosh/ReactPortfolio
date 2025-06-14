@@ -9,7 +9,10 @@ const ContactsPage: React.FC = () => {
     email: '',
     message: ''
   });
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState<{
+    type: 'success' | 'error' | 'loading' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -18,7 +21,7 @@ const ContactsPage: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('Sending...');
+    setStatus({ type: 'loading', message: 'Sending message...' });
 
     try {
       const response = await fetch('/api/send-email', {
@@ -27,15 +30,23 @@ const ContactsPage: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        setStatus('Message sent successfully!');
+        setStatus({ type: 'success', message: 'Message sent successfully!' });
         setFormData({ name: '', email: '', message: '' });
       } else {
-        setStatus('Failed to send message. Please try again later.');
+        setStatus({ 
+          type: 'error', 
+          message: data.error || 'Failed to send message. Please try again later.' 
+        });
       }
     } catch (error) {
       console.error('Error sending email:', error);
-      setStatus('Failed to send message. Please try again later.');
+      setStatus({ 
+        type: 'error', 
+        message: 'Failed to send message. Please try again later.' 
+      });
     }
   };
 
@@ -129,12 +140,23 @@ const ContactsPage: React.FC = () => {
               </div>
               <button
                 type="submit"
-                className="w-full btn bg-primary hover:bg-primary-dark text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+                disabled={status.type === 'loading'}
+                className={`w-full btn bg-primary hover:bg-primary-dark text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all ${
+                  status.type === 'loading' ? 'opacity-75 cursor-not-allowed' : ''
+                }`}
               >
-                Send Message
+                {status.type === 'loading' ? 'Sending...' : 'Send Message'}
                 <Send className="ml-2 h-5 w-5 inline" />
               </button>
-              {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
+              {status.message && (
+                <p className={`mt-4 text-center ${
+                  status.type === 'success' ? 'text-green-600' :
+                  status.type === 'error' ? 'text-red-600' :
+                  'text-gray-700'
+                }`}>
+                  {status.message}
+                </p>
+              )}
             </form>
           </div>
         </div>
