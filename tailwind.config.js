@@ -47,6 +47,9 @@ export default {
           },
         },
       }),
+      fontFamily: {
+        sans: ['Lato', 'sans-serif'],
+      },
     },
   },
   plugins: [
