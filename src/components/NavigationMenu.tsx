@@ -15,10 +15,10 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
   closeMenu = () => {}
 }) => {
   return (
-    <nav className={`${isMobile ? 'p-6' : ''}`}>
+    <nav className={`${isMobile ? 'p-4' : ''}`}>
       <ul className={`
         flex 
-        ${isMobile ? 'flex-col space-y-6' : 'space-x-6'}
+        ${isMobile ? 'flex-col space-y-4' : 'space-x-6'}
       `}>
         {items.map((item, index) => (
           <li key={index} className="relative group">
@@ -27,7 +27,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
                 to={item.path} 
                 className={`
                   text-gray-800 hover:text-primary font-medium transition-colors
-                  ${isMobile ? 'block py-3 text-lg' : 'inline-block py-2'}
+                  ${isMobile ? 'block py-2' : 'inline-block py-2'}
                 `}
                 onClick={closeMenu}
               >
@@ -36,7 +36,7 @@ const NavigationMenu: React.FC<NavigationMenuProps> = ({
             ) : (
               <div className={`
                 text-gray-800 hover:text-primary font-medium transition-colors
-                ${isMobile ? 'py-3 text-lg' : 'py-2 inline-flex items-center'}
+                ${isMobile ? 'py-2' : 'py-2 inline-flex items-center'}
                 ${item.children ? 'group-hover:text-primary cursor-pointer' : ''}
                 relative z-50
               `}>
