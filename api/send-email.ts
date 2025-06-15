@@ -3,7 +3,11 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+// Remove the edge runtime config as we're using Node.js runtime
+export default async function handler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -15,6 +19,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set');
+      return res.status(500).json({ error: 'Email service configuration error' });
+    }
+
     const result = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'joshzeng7@gmail.com',
@@ -27,9 +36,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `,
     });
 
+    console.log('Email sent successfully:', result);
     return res.status(200).json({ message: 'Email sent', data: result });
   } catch (error: any) {
-    console.error('Resend Error:', error);
-    return res.status(500).json({ error: error?.message || 'Failed to send email' });
+    console.error('Detailed Resend Error:', {
+      message: error?.message,
+      status: error?.status,
+      code: error?.code,
+      stack: error?.stack
+    });
+    return res.status(500).json({ 
+      error: 'Failed to send email',
+      details: error?.message || 'Unknown error'
+    });
   }
 }
