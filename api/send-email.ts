@@ -23,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     await transporter.sendMail({
       from: email,
-      to: process.env.CONTACT_EMAIL,
+      to: process.env.GMAIL_USER,
       subject: `Contact Form Submission from ${name}`,
       text: message,
       html: `<p><strong>From:</strong> ${name} (${email})</p><p>${message}</p>`,
