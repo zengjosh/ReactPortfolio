@@ -4,7 +4,6 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
 <<<<<<< HEAD
-<<<<<<< HEAD
   plugins: [
     react(),
   ],
@@ -30,12 +29,6 @@ export default defineConfig({
       },
     },
   },
-=======
-  plugins: [react()],
-  optimizeDeps: {
-    exclude: ['lucide-react'],
-  },
->>>>>>> parent of d4bceef (fix email functionality hopefully)
 =======
   plugins: [react()],
   optimizeDeps: {
