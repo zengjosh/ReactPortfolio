@@ -1,52 +1,37 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import nodemailer from 'nodemailer';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { name, email, message } = req.body;
 
-  // Validate required fields
   if (!name || !email || !message) {
-    console.error('Missing required fields:', { name, email, message });
-    return res.status(400).json({ error: 'Missing required fields' });
+    return res.status(400).json({ error: 'Missing fields' });
   }
 
   try {
-    // Create a transporter using SMTP settings
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true, // Use SSL
+      service: 'gmail',
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASS,
+        user: process.env.CONTACT_EMAIL, // Your Gmail address
+        pass: process.env.CONTACT_EMAIL_PASSWORD, // App password (not your real password)
       },
     });
 
-    // Send the email
-    const mailOptions = {
-      from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER,
-      subject: 'New Contact Form Submission',
-      text: `You have a new message from ${name} (${email}):\n\n${message}`,
-      html: `
-<h2>New Contact Form Submission</h2>
-<p><strong>Name:</strong> ${name}</p>
-<p><strong>Email:</strong> ${email}</p>
-<h3>Message:</h3>
-<p>${message.replace(/\n/g, '<br>')}</p>
-      `,
-    };
+    await transporter.sendMail({
+      from: email,
+      to: process.env.CONTACT_EMAIL,
+      subject: `Contact Form Submission from ${name}`,
+      text: message,
+      html: `<p><strong>From:</strong> ${name} (${email})</p><p>${message}</p>`,
+    });
 
-    await transporter.sendMail(mailOptions);
-
-    console.log('Email sent successfully');
     return res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Email sending error:', error);
     return res.status(500).json({ error: 'Failed to send email' });
   }
-} 
+}
