@@ -1,29 +1,37 @@
 import { Resend } from 'resend';
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const config = {
+  runtime: 'edge',
+};
 
-// Remove the edge runtime config as we're using Node.js runtime
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse
-) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
-  }
-
-  const { name, email, message } = req.body;
-
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Missing required fields' });
+export default async function handler(request: Request) {
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ error: 'Method Not Allowed' }), {
+      status: 405,
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   try {
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not set');
-      return res.status(500).json({ error: 'Email service configuration error' });
+    const { name, email, message } = await request.json();
+
+    if (!name || !email || !message) {
+      return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
     }
 
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set');
+      return new Response(JSON.stringify({ error: 'Email service configuration error' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    
     const result = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'joshzeng7@gmail.com',
@@ -36,18 +44,18 @@ export default async function handler(
       `,
     });
 
-    console.log('Email sent successfully:', result);
-    return res.status(200).json({ message: 'Email sent', data: result });
-  } catch (error: any) {
-    console.error('Detailed Resend Error:', {
-      message: error?.message,
-      status: error?.status,
-      code: error?.code,
-      stack: error?.stack
+    return new Response(JSON.stringify({ message: 'Email sent', data: result }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
     });
-    return res.status(500).json({ 
+  } catch (error: any) {
+    console.error('Email sending error:', error);
+    return new Response(JSON.stringify({ 
       error: 'Failed to send email',
       details: error?.message || 'Unknown error'
+    }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' }
     });
   }
 }
