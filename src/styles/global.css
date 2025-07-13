@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #6d38c5;
+  --primary-light: #8B5CF6;
+  --primary-dark: #5B21B6;
+  
+  --secondary: #475569;
+  --secondary-light: #64748B;
+  --secondary-dark: #334155;
+  
+  --accent: #0EA5E9;
+  --accent-light: #38BDF8;
+  --accent-dark: #0284C7;
+  
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --text-tertiary: #9CA3AF;
+  
+  --background: #FFFFFF;
+  --background-alt: #F9FAFB;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-white text-gray-900 antialiased;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium leading-tight;
+  }
+  
+  h1 {
+    @apply text-4xl md:text-5xl;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  p {
+    @apply leading-relaxed;
+  }
+
+  a {
+    @apply text-primary hover:text-primary-dark transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium 
+    transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark focus:ring-primary;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary-dark focus:ring-secondary;
+  }
+  
+  .section {
+    @apply py-12 md:py-20;
+  }
+
+  /* Dropdown menu animations */
+  .group:hover .group-hover\:visible {
+    visibility: visible;
+  }
+
+  .group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+
+  .group:hover .group-hover\:translate-y-0 {
+    transform: translateY(0);
+  }
+}
