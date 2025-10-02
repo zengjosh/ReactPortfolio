@@ -14,8 +14,8 @@ const Hyperspeed = ({ effectOptions = {
     islandWidth: 2,
     lanesPerRoad: 4,
     fov: 90,
-    fovSpeedUp: 160,
-    speedUp: 2,
+    fovSpeedUp: 200,
+    speedUp: 10,
     carLightsFade: 0.4,
     totalSideLightSticks: 20,
     lightPairsPerRoadWay: 40,
@@ -32,21 +32,21 @@ const Hyperspeed = ({ effectOptions = {
     carShiftX: [-0.8, 0.8],
     carFloorSeparation: [0, 5],
     colors: {
-        roadColor: 0xE5E7EB,
-        islandColor: 0xF3F4F6,
-        background: 0xFFFFFF,
-        shoulderLines: 0x3B82F6,
-        brokenLines: 0x60A5FA,
-        leftCars: [0x3B82F6, 0x1D4ED8, 0x1E40AF],
-        rightCars: [0x8B5CF6, 0x7C3AED, 0x6D28D9],
-        sticks: 0x3B82F6,
+        roadColor: 0xB0B0B0,
+        islandColor: 0x0a0a0a,
+        background: 0x000000,
+        shoulderLines: 0xFFFFFF,
+        brokenLines: 0xFFFFFF,
+        leftCars: [0xD856BF, 0x6750A2, 0xC247AC],
+        rightCars: [0x03B3C3, 0x0E5EA5, 0x324555],
+        sticks: 0x03B3C3,
     }
 } }) => {
-    const hyperspeed = useRef<HTMLDivElement>(null);
-    const appRef = useRef<any>(null);
+    const hyperspeed = useRef(null);
+    const appRef = useRef(null);
 
     useEffect(() => {
-        if (appRef.current && typeof appRef.current.dispose === 'function') {
+        if (appRef.current) {
             appRef.current.dispose();
             const container = document.getElementById('lights');
             if (container) {
@@ -81,7 +81,7 @@ const Hyperspeed = ({ effectOptions = {
             uPowY: { value: new THREE.Vector2(20, 2) }
         };
 
-        let nsin = (val: number) => Math.sin(val) * 0.5 + 0.5;
+        let nsin = val => Math.sin(val) * 0.5 + 0.5;
 
         const distortions = {
             mountainDistortion: {
@@ -355,6 +355,12 @@ const Hyperspeed = ({ effectOptions = {
                     antialias: false,
                     alpha: true
                 });
+                // Set output color space for vibrant colors
+                if (typeof THREE.SRGBColorSpace !== 'undefined') {
+                    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
+                } else if (typeof THREE.sRGBEncoding !== 'undefined') {
+                    this.renderer.outputEncoding = THREE.sRGBEncoding;
+                }
                 this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
                 this.renderer.setPixelRatio(window.devicePixelRatio);
                 this.composer = new EffectComposer(this.renderer);
@@ -498,9 +504,13 @@ const Hyperspeed = ({ effectOptions = {
                     -(options.roadWidth + options.islandWidth / 2)
                 );
 
-                this.container.addEventListener("mousedown", this.onMouseDown);
-                this.container.addEventListener("mouseup", this.onMouseUp);
-                this.container.addEventListener("mouseout", this.onMouseUp);
+                // Attach mouse/touch listeners to the canvas only
+                const canvas = this.renderer.domElement;
+                canvas.addEventListener("mousedown", this.onMouseDown);
+                canvas.addEventListener("mouseup", this.onMouseUp);
+                canvas.addEventListener("mouseout", this.onMouseUp);
+                canvas.addEventListener("touchstart", this.onMouseDown);
+                canvas.addEventListener("touchend", this.onMouseUp);
 
                 this.tick();
             }
@@ -581,10 +591,14 @@ const Hyperspeed = ({ effectOptions = {
 
                 // Remove event listeners
                 window.removeEventListener("resize", this.onWindowResize.bind(this));
-                if (this.container) {
-                    this.container.removeEventListener("mousedown", this.onMouseDown);
-                    this.container.removeEventListener("mouseup", this.onMouseUp);
-                    this.container.removeEventListener("mouseout", this.onMouseUp);
+                // Remove from canvas
+                if (this.renderer && this.renderer.domElement) {
+                    const canvas = this.renderer.domElement;
+                    canvas.removeEventListener("mousedown", this.onMouseDown);
+                    canvas.removeEventListener("mouseup", this.onMouseUp);
+                    canvas.removeEventListener("mouseout", this.onMouseUp);
+                    canvas.removeEventListener("touchstart", this.onMouseDown);
+                    canvas.removeEventListener("touchend", this.onMouseUp);
                 }
             }
 
@@ -594,15 +608,6 @@ const Hyperspeed = ({ effectOptions = {
 
             tick() {
                 if (this.disposed || !this) return;
-
-                // Limit frame rate to 30 FPS for better performance
-                const now = performance.now();
-                if (now - this.lastFrameTime < 33) { // 1000ms / 30fps ≈ 33ms
-                    requestAnimationFrame(this.tick);
-                    return;
-                }
-                this.lastFrameTime = now;
-
                 if (resizeRendererToDisplaySize(this.renderer, this.setSize)) {
                     const canvas = this.renderer.domElement;
                     this.camera.aspect = canvas.clientWidth / canvas.clientHeight;
@@ -1139,7 +1144,7 @@ const Hyperspeed = ({ effectOptions = {
     }, [effectOptions]);
 
     return (
-        <div id="lights" ref={hyperspeed}></div>
+        <div id="lights" className="w-full h-full" ref={hyperspeed}></div>
     );
 }
 

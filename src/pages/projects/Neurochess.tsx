@@ -62,6 +62,21 @@ const Neurochess: React.FC = () => {
               We used GitHub for version control and hosted the app on Vercel. API keys for both chess-api and Gemini were stored securely as environment variables to protect sensitive information. Thanks to efficient API usage and relatively low traffic, the entire project remained within the free tier of all tools used.
             </p>
 
+            <h3 className="text-xl font-semibold mb-3">Recognition</h3>
+            <p className="text-gray-600 mb-6">
+              Neurochess won the{' '}
+              <a 
+                href="https://www.congressionalappchallenge.us/24-ca10/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:underline"
+              >
+                2024 Congressional App Challenge
+                <ExternalLink className="inline-block h-4 w-4 ml-1" />
+              </a>
+              {' '}for California’s 10th District and was showcased at #HouseOfCode in Washington, D.C.
+            </p>
+
             <h3 className="text-xl font-semibold mb-3">Skills Used</h3>
             <div className="flex flex-wrap gap-3 mb-6">
               <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">React</span>

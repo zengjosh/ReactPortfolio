@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-scroll';
 import { ChevronRight, Github, Linkedin, Code, BookOpen, Target } from 'lucide-react';
 import TypeAnimationText from '../components/TypeAnimationText';
 import GradientText from '../components/GradientText';
@@ -57,13 +58,15 @@ const HomePage: React.FC = () => {
                 </div>
               </div>
               <div className="flex flex-wrap gap-6">
-                <a
-                  href="#about"
-                  className="btn bg-primary hover:bg-primary-dark text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all text-lg px-12 py-4 rounded-full"
+                <Link
+                  to="about"
+                  smooth={true}
+                  duration={500}
+                  className="btn bg-primary hover:bg-primary-dark text-white shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all text-lg px-12 py-4 rounded-full flex items-center cursor-pointer"
                 >
                   Learn More
                   <ChevronRight className="ml-2 h-5 w-5" />
-                </a>
+                </Link>
                 <div className="flex gap-6">
                   <a
                     href="https://github.com/zengjosh"
@@ -75,7 +78,7 @@ const HomePage: React.FC = () => {
                     <Github className="h-6 w-6 text-gray-700" />
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/josh-zeng-a7107a273/"
+                    href="https://www.linkedin.com/in/zengjosh/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-4 bg-white rounded-full shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all"
@@ -97,7 +100,7 @@ const HomePage: React.FC = () => {
             </div>
             <div className="lg:w-1/2">
               <AnimatedImage
-                src="https://i.imgur.com/w0iKHeP.jpeg"
+                src="https://i.imgur.com/iOpvd03.png"
                 alt="Josh Zeng"
                 className="w-full"
               />
