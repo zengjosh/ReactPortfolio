@@ -89,6 +89,8 @@ const AnimatedImage: React.FC<AnimatedImageProps> = ({ src, alt, className = '' 
             {/* Glow effect */}
             <div className="absolute -inset-12 bg-gradient-to-r from-primary/30 via-primary-light/20 to-primary-dark/30 rounded-full blur-3xl"></div>
 
+            
+
             {/* Image container */}
             <div
                 ref={imageRef}

@@ -1,6 +1,24 @@
-import { Project, ProjectTag } from '../types/project';
+import { Project, ProjectTag, ProjectStatus } from '../types/project';
 
 const projects: Project[] = [
+  {
+    id: 'elotus',
+    title: 'Elotus',
+    thumbnail: 'https://i.imgur.com/placeholder.png',
+    tags: ['Web Development'] as ProjectTag[],
+    year: 2025,
+    status: 'In Progress' as ProjectStatus,
+    externalLink: 'https://elotus.tech'
+  },
+  {
+    id: 'sealtalk',
+    title: 'SealTalk',
+    thumbnail: 'https://i.imgur.com/placeholder.png',
+    tags: ['Web Development'] as ProjectTag[],
+    year: 2025,
+    status: 'In Progress' as ProjectStatus,
+    externalLink: 'https://sealtalk.app'
+  },
   {
     id: 'stoc-ai',
     title: 'STOC AI',
@@ -8,7 +26,8 @@ const projects: Project[] = [
     thumbnail: 'https://i.imgur.com/EKxPUG2.jpeg',
     tags: ['Python', 'Web Development'] as ProjectTag[],
     path: '/stoc-ai',
-    year: 2025
+    year: 2025,
+    status: 'Completed' as ProjectStatus
   },
   {
     id: 'neurochess',
@@ -17,7 +36,8 @@ const projects: Project[] = [
     thumbnail: 'https://i.imgur.com/pkbbe9D.png',
     tags: ['Web Development'] as ProjectTag[],
     path: '/neurochess',
-    year: 2024
+    year: 2024,
+    status: 'Completed' as ProjectStatus
   },
   {
     id: 'focusflow',
@@ -26,7 +46,8 @@ const projects: Project[] = [
     thumbnail: 'https://img.youtube.com/vi/WL_y1XK-sIQ/sddefault.jpg',
     tags: ['Web Development'] as ProjectTag[],
     path: '/focusflow',
-    year: 2024
+    year: 2024,
+    status: 'Completed' as ProjectStatus
   },
   {
     id: 'LSTM-financial-model',
@@ -35,7 +56,8 @@ const projects: Project[] = [
     thumbnail: 'https://i.imgur.com/yrBCJvi.png',
     tags: ['Python'] as ProjectTag[],
     path: '/LSTM-financial-model',
-    year: 2024
+    year: 2024,
+    status: 'Completed' as ProjectStatus
   },
   {
     id: 'skyblock-item-logger',
@@ -44,7 +66,8 @@ const projects: Project[] = [
     thumbnail: 'https://i.imgur.com/jldOwY1.png',
     tags: ['Python'] as ProjectTag[],
     path: '/skyblock-item-logger',
-    year: 2024
+    year: 2024,
+    status: 'Completed' as ProjectStatus
   },
   {
     id: 'valorant-loadout-optimizer',
@@ -53,7 +76,8 @@ const projects: Project[] = [
     thumbnail: 'https://i.imgur.com/YSJubb4.png',
     tags: ['Python'] as ProjectTag[],
     path: '/valorant-loadout-optimizer',
-    year: 2024
+    year: 2024,
+    status: 'Completed' as ProjectStatus
   },
   {
     id: 'chess-analysis',
@@ -62,7 +86,8 @@ const projects: Project[] = [
     thumbnail: 'https://i.imgur.com/uhGItrb.png',
     tags: ['Java'] as ProjectTag[],
     path: '/chess-analysis',
-    year: 2023
+    year: 2023,
+    status: 'Completed' as ProjectStatus
   },
   {
     id: 'snake-game',
@@ -71,7 +96,8 @@ const projects: Project[] = [
     thumbnail: 'https://img.youtube.com/vi/2QblpNvy2tk/hqdefault.jpg',
     tags: ['Java'] as ProjectTag[],
     path: '/snake-game',
-    year: 2023
+    year: 2023,
+    status: 'Completed' as ProjectStatus
   },
   {
     id: 'polka-dot',
@@ -80,7 +106,8 @@ const projects: Project[] = [
     thumbnail: 'https://img.youtube.com/vi/n0cZOY_2MZk/sddefault.jpg',
     tags: ['Python'] as ProjectTag[],
     path: '/polka-dot',
-    year: 2023
+    year: 2023,
+    status: 'Completed' as ProjectStatus
   }
 ];
 

@@ -27,6 +27,22 @@
   --background-alt: #F9FAFB;
 }
 
+/* Minimal utility for backdrop boxes */
+.box-offset { position: relative; z-index: 0; }
+.box-offset::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translate(6px, 6px);
+  background: rgba(0,0,0,0.04);
+  border-radius: 14px;
+  z-index: -1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
 @layer base {
   html {
     font-family: 'Inter', system-ui, sans-serif;

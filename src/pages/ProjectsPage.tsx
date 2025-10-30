@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Filter, X, Code, Globe, Coffee } from 'lucide-react';
+import { Filter, X, Code, Globe, Coffee, ExternalLink, Loader2 } from 'lucide-react';
 import { Project, ProjectTag } from '../types/project';
 import { projects } from '../data/projects';
 
@@ -43,7 +43,7 @@ const ProjectsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen bg-gray-50 pt-20 relative">
       <div className="container mx-auto px-4 py-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <h1 className="text-4xl font-bold">Projects</h1>
@@ -139,52 +139,84 @@ const ProjectsPage: React.FC = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map(project => (
-            <Link
-              key={project.id}
-              to={project.path}
-              className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              <div className="aspect-video overflow-hidden">
-                <img
-                  src={project.thumbnail}
-                  alt={project.title}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map(tag => {
-                    let tagStyle = '';
-                    switch (tag) {
-                      case 'Java':
-                        tagStyle = 'bg-blue-100 text-blue-800';
-                        break;
-                      case 'Python':
-                        tagStyle = 'bg-green-100 text-green-800';
-                        break;
-                      case 'Web Development':
-                        tagStyle = 'bg-purple-100 text-purple-800';
-                        break;
-                      default:
-                        tagStyle = 'bg-gray-100 text-gray-700';
-                    }
-                    return (
-                      <span
-                        key={tag}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${tagStyle}`}
-                      >
-                        {getTagIcon(tag)}
-                        {tag}
+          {filteredProjects.map(project => {
+            const isInProgress = project.status === 'In Progress';
+            const ProjectWrapper = isInProgress && project.externalLink ? 'a' : Link;
+            const wrapperProps = isInProgress && project.externalLink
+              ? { href: project.externalLink, target: '_blank', rel: 'noopener noreferrer' }
+              : { to: project.path };
+            
+            return (
+              <ProjectWrapper
+                key={project.id}
+                {...wrapperProps}
+                className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+              >
+                <div className="aspect-video overflow-hidden relative">
+                  {isInProgress ? (
+                    <div className="w-full h-full bg-gradient-to-br from-gray-100 to-white flex items-center justify-center">
+                      <p className="text-gray-600 font-medium">{project.title}</p>
+                    </div>
+                  ) : (
+                    <img
+                      src={project.thumbnail}
+                      alt={project.title}
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    />
+                  )}
+                  {isInProgress && (
+                    <div className="absolute top-3 right-3">
+                      <span className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-200 bg-amber-50 text-amber-700 shadow-sm">
+                        <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                        In Progress
                       </span>
-                    );
-                  })}
+                    </div>
+                  )}
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="p-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <h3 className="text-xl font-semibold">{project.title}</h3>
+                    {isInProgress && project.externalLink && (
+                      <ExternalLink className="w-4 h-4 text-primary" />
+                    )}
+                  </div>
+                  {project.description && (
+                    <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
+                  )}
+                  {!project.description && isInProgress && (
+                    <p className="text-gray-400 italic mb-4">Coming soon...</p>
+                  )}
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map(tag => {
+                      let tagStyle = '';
+                      switch (tag) {
+                        case 'Java':
+                          tagStyle = 'bg-blue-100 text-blue-800';
+                          break;
+                        case 'Python':
+                          tagStyle = 'bg-green-100 text-green-800';
+                          break;
+                        case 'Web Development':
+                          tagStyle = 'bg-purple-100 text-purple-800';
+                          break;
+                        default:
+                          tagStyle = 'bg-gray-100 text-gray-700';
+                      }
+                      return (
+                        <span
+                          key={tag}
+                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${tagStyle}`}
+                        >
+                          {getTagIcon(tag)}
+                          {tag}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              </ProjectWrapper>
+            );
+          })}
         </div>
       </div>
     </div>

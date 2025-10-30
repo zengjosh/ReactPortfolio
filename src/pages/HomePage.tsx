@@ -25,6 +25,8 @@ const HomePage: React.FC = () => {
         <div className="absolute top-40 right-20 w-32 h-32 bg-primary-light/10 rounded-full blur-xl"></div>
         <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-primary-dark/10 rounded-full blur-xl"></div>
 
+        
+
         <div className="container mx-auto px-4 py-12 lg:py-16 relative">
           <div className="flex flex-col lg:flex-row items-center gap-20 lg:gap-40 min-h-[calc(100vh-8rem)]">
             <div className="lg:w-1/2 space-y-10 flex flex-col justify-center">
@@ -118,6 +120,8 @@ const HomePage: React.FC = () => {
         </div>
 
         <div className="container mx-auto px-4 relative">
+          
+          
           <div className="text-center mb-24">
             <h2 className="text-4xl md:text-5xl font-bold mb-8">About Me</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -167,7 +171,7 @@ const HomePage: React.FC = () => {
           </div>
 
           {/* Skills Section */}
-          <div className="text-center">
+          <div className="text-center relative">
             <h3 className="text-2xl font-bold mb-12">Technical Skills</h3>
             <div className="max-w-6xl mx-auto">
               <AnimatedSkillsBanner
@@ -197,6 +201,8 @@ const HomePage: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Featured Projects</h2>
             <p className="text-xl text-gray-600">Showcasing my latest work</p>
           </div>
+
+          
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 max-w-7xl mx-auto">
             {/* Project 1 */}
