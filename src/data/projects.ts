@@ -2,22 +2,15 @@ import { Project, ProjectTag, ProjectStatus } from '../types/project';
 
 const projects: Project[] = [
   {
-    id: 'elotus',
-    title: 'Elotus',
-    thumbnail: 'https://i.imgur.com/placeholder.png',
-    tags: ['Web Development'] as ProjectTag[],
+    id: 'r3fresh',
+    title: 'r3fresh',
+    description: 'Full-stack agent lifecycle management platform: Python SDK on PyPI for AI agent telemetry, FastAPI on Railway, Supabase/PostgreSQL event-driven architecture, Next.js dashboard with AI assistant, and Stripe subscriptions.',
+    thumbnail: 'https://i.imgur.com/4I2oRwp.png',
+    tags: ['Python', 'Web Development'] as ProjectTag[],
+    path: '/r3fresh',
     year: 2025,
     status: 'In Progress' as ProjectStatus,
-    externalLink: 'https://elotus.tech'
-  },
-  {
-    id: 'sealtalk',
-    title: 'SealTalk',
-    thumbnail: 'https://i.imgur.com/placeholder.png',
-    tags: ['Web Development'] as ProjectTag[],
-    year: 2025,
-    status: 'In Progress' as ProjectStatus,
-    externalLink: 'https://sealtalk.app'
+    highlights: ['Under development']
   },
   {
     id: 'stoc-ai',
@@ -37,17 +30,28 @@ const projects: Project[] = [
     tags: ['Web Development'] as ProjectTag[],
     path: '/neurochess',
     year: 2024,
-    status: 'Completed' as ProjectStatus
+    status: 'Completed' as ProjectStatus,
+    featured: true,
+    highlights: [
+      'Congressional App Challenge Winner',
+      'Presented at #HouseOfCode'
+    ]
   },
   {
-    id: 'focusflow',
-    title: 'FocusFlow',
+    id: 'tetri-us',
+    title: 'tetri.us',
     description: 'A modern web-based Tetris game with secure code obfuscation, Firebase authentication, and optimized leaderboard system, featuring SEO enhancements and responsive design.',
     thumbnail: 'https://img.youtube.com/vi/WL_y1XK-sIQ/sddefault.jpg',
     tags: ['Web Development'] as ProjectTag[],
-    path: '/focusflow',
+    path: '/tetri-us',
     year: 2024,
-    status: 'Completed' as ProjectStatus
+    status: 'Completed' as ProjectStatus,
+    featured: true,
+    highlights: [
+      '20k+ visits',
+      '150+ accounts',
+      '1000+ total hours played'
+    ]
   },
   {
     id: 'LSTM-financial-model',

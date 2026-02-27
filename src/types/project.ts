@@ -11,4 +11,8 @@ export interface Project {
   year: number;
   status?: ProjectStatus;
   externalLink?: string;
+  /** Optional little callouts like awards, usage stats, etc. */
+  highlights?: string[];
+  /** Flag to visually feature this project in grids. */
+  featured?: boolean;
 } 

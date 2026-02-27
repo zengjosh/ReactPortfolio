@@ -150,10 +150,22 @@ const ProjectsPage: React.FC = () => {
               <ProjectWrapper
                 key={project.id}
                 {...wrapperProps}
-                className="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                className="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
               >
+                {project.highlights && project.highlights.length > 0 && (
+                  <div className="project-notes-layer" data-project={project.id}>
+                    {project.highlights.map((note, index) => (
+                      <div
+                        key={index}
+                        className="rough-annotation project-note text-slate-800"
+                      >
+                        {note}
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <div className="aspect-video overflow-hidden relative">
-                  {isInProgress ? (
+                  {isInProgress && project.id !== 'r3fresh' ? (
                     <div className="w-full h-full bg-gradient-to-br from-gray-100 to-white flex items-center justify-center">
                       <p className="text-gray-600 font-medium">{project.title}</p>
                     </div>
@@ -164,7 +176,7 @@ const ProjectsPage: React.FC = () => {
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                     />
                   )}
-                  {isInProgress && (
+                  {isInProgress && project.id !== 'r3fresh' && (
                     <div className="absolute top-3 right-3">
                       <span className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border border-amber-200 bg-amber-50 text-amber-700 shadow-sm">
                         <span className="w-2 h-2 rounded-full bg-amber-500"></span>
@@ -181,7 +193,7 @@ const ProjectsPage: React.FC = () => {
                     )}
                   </div>
                   {project.description && (
-                    <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
+                    <p className="text-gray-600 mb-3 line-clamp-2">{project.description}</p>
                   )}
                   {!project.description && isInProgress && (
                     <p className="text-gray-400 italic mb-4">Coming soon...</p>

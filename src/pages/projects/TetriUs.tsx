@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const FocusFlow: React.FC = () => {
+const TetriUs: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -8,18 +8,18 @@ const FocusFlow: React.FC = () => {
   return (
     <div className="pt-20 min-h-screen bg-gray-50">
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8">FocusFlow <span className="text-2xl text-gray-600">2024</span></h1>
+        <h1 className="text-4xl font-bold mb-8">tetri.us <span className="text-2xl text-gray-600">2024</span></h1>
         
         <div className="bg-white rounded-lg shadow-md p-8 mb-8">
           <div className="prose prose-lg max-w-none">
             <p className="text-gray-600 mb-6">
               A friend mentioned his interest in Tetris and got me into it so decided to make <a 
-                href="https://focusflow.us/" 
+                href="https://tetri.us/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800"
               >
-                FocusFlow
+                tetri.us
               </a>, an online Tetris game that would be available from almost anywhere.
             </p>
 
@@ -74,4 +74,5 @@ const FocusFlow: React.FC = () => {
   );
 };
 
-export default FocusFlow; 
+export default TetriUs;
+
