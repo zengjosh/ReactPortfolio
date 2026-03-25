@@ -133,7 +133,7 @@ const HomePage: React.FC = () => {
             <div className="space-y-8">
               <div className="prose prose-lg text-gray-700">
                 <p className="text-lg leading-relaxed mb-6">
-                  I'm a freshman at Purdue University pursuing a B.S. in Computer Science as part of the Data Mine Learning Community. I recently graduated from Dublin High School with a 4.02 GPA, where I was actively involved in the Engineering and Design Academy, combining hands-on technical work with collaborative problem-solving.
+                  I'm a Purdue University student pursuing a B.S. in Computer Science as part of the Data Mine Learning Community with a 3.94 GPA. I graduated from Dublin High School, where I was actively involved in the Engineering and Design Academy, combining hands-on technical work with collaborative problem-solving.
                 </p>
                 <p className="text-lg leading-relaxed">
                   My passion for computer science grew through personal projects, competitive programming, and extracurriculars, ranging from building web applications and machine learning models to leading student initiatives in technology and environmental sustainability. I'm eager to continue developing my skills, explore new areas within CS, and contribute to impactful projects throughout my time at Purdue and beyond.
@@ -151,7 +151,7 @@ const HomePage: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-4">Education</h3>
                 <p className="text-gray-600 leading-relaxed">
-                  Purdue University freshman in Computer Science, Data Mine Learning Community. Graduated from Dublin High School
+                  Purdue University Computer Science student, Data Mine Learning Community. 3.94 GPA
                 </p>
               </SpotlightCard>
 
@@ -207,8 +207,8 @@ const HomePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 max-w-7xl mx-auto">
             {/* Project 1 */}
             <div className="group bg-gray-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="aspect-video overflow-hidden bg-gradient-to-r from-primary to-primary-dark flex items-center justify-center text-white">
-                <span className="text-2xl font-semibold">STOC AI</span>
+              <div className="aspect-video overflow-hidden">
+                <img src="https://i.imgur.com/EKxPUG2.jpeg" alt="STOC AI" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               </div>
               <div className="p-8">
                 <h3 className="text-xl font-semibold mb-2">STOC AI</h3>
@@ -224,8 +224,8 @@ const HomePage: React.FC = () => {
 
             {/* Project 2 */}
             <div className="group bg-gray-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="aspect-video overflow-hidden bg-gradient-to-r from-teal-400 to-emerald-500 flex items-center justify-center text-white">
-                <span className="text-2xl font-semibold">LSTM NVDA Model</span>
+              <div className="aspect-video overflow-hidden">
+                <img src="https://i.imgur.com/yrBCJvi.png" alt="LSTM NVDA Model" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               </div>
               <div className="p-8">
                 <h3 className="text-xl font-semibold mb-2">LSTM NVDA Model</h3>
@@ -241,11 +241,12 @@ const HomePage: React.FC = () => {
 
             {/* Project 3 */}
             <div className="group bg-gray-50 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
-              <div className="aspect-video overflow-hidden bg-gradient-to-r from-amber-400 to-orange-500 flex items-center justify-center text-white">
-                <span className="text-2xl font-semibold">Neurochess</span>
+              <div className="aspect-video overflow-hidden">
+                <img src="https://i.imgur.com/U2FywBl.jpeg" alt="Neurochess - Congressional App Challenge Winner" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               </div>
               <div className="p-8">
                 <h3 className="text-xl font-semibold mb-2">Neurochess</h3>
+                <p className="text-sm font-medium text-primary mb-2">Congressional App Challenge Winner</p>
                 <p className="text-gray-600 mb-4">
                   A web platform combining chess education with interactive analysis and cognitive feedback, featuring educational videos and AI-powered move analysis.
                 </p>

@@ -26,7 +26,7 @@ const projects: Project[] = [
     id: 'neurochess',
     title: 'Neurochess',
     description: 'A web application that combines chess education with interactive analysis and cognitive feedback, featuring AI-powered move analysis, educational videos, and responsive design for all devices.',
-    thumbnail: 'https://i.imgur.com/pkbbe9D.png',
+    thumbnail: 'https://i.imgur.com/U2FywBl.jpeg',
     tags: ['Web Development'] as ProjectTag[],
     path: '/neurochess',
     year: 2024,

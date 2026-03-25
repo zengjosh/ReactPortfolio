@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Filter, X, Code, Globe, Coffee, ExternalLink, Loader2 } from 'lucide-react';
+import { Filter, X, Code, Globe, Coffee, ExternalLink } from 'lucide-react';
 import { Project, ProjectTag } from '../types/project';
 import { projects } from '../data/projects';
 
@@ -150,20 +150,8 @@ const ProjectsPage: React.FC = () => {
               <ProjectWrapper
                 key={project.id}
                 {...wrapperProps}
-                className="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                className={`group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer ${project.highlights && project.highlights.length > 0 ? 'border-l-4 border-l-amber-400' : ''}`}
               >
-                {project.highlights && project.highlights.length > 0 && (
-                  <div className="project-notes-layer" data-project={project.id}>
-                    {project.highlights.map((note, index) => (
-                      <div
-                        key={index}
-                        className="rough-annotation project-note text-slate-800"
-                      >
-                        {note}
-                      </div>
-                    ))}
-                  </div>
-                )}
                 <div className="aspect-video overflow-hidden relative">
                   {isInProgress && project.id !== 'r3fresh' ? (
                     <div className="w-full h-full bg-gradient-to-br from-gray-100 to-white flex items-center justify-center">
@@ -197,6 +185,18 @@ const ProjectsPage: React.FC = () => {
                   )}
                   {!project.description && isInProgress && (
                     <p className="text-gray-400 italic mb-4">Coming soon...</p>
+                  )}
+                  {project.highlights && project.highlights.length > 0 && (
+                    <div className="flex flex-wrap gap-x-3 gap-y-1 mb-3">
+                      {project.highlights.map((highlight, index) => (
+                        <span
+                          key={index}
+                          className="text-sm font-medium text-amber-600"
+                        >
+                          {highlight}
+                        </span>
+                      ))}
+                    </div>
                   )}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map(tag => {
