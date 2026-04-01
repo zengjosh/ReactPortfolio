@@ -1,17 +1,17 @@
 import { Project, ProjectTag, ProjectStatus } from '../types/project';
 
 const projects: Project[] = [
-  {
-    id: 'r3fresh',
-    title: 'r3fresh',
-    description: 'Full-stack agent lifecycle management platform: Python SDK on PyPI for AI agent telemetry, FastAPI on Railway, Supabase/PostgreSQL event-driven architecture, Next.js dashboard with AI assistant, and Stripe subscriptions.',
-    thumbnail: 'https://i.imgur.com/4I2oRwp.png',
-    tags: ['Python', 'Web Development'] as ProjectTag[],
-    path: '/r3fresh',
-    year: 2025,
-    status: 'In Progress' as ProjectStatus,
-    highlights: ['Under development']
-  },
+  // {
+  //   id: 'r3fresh',
+  //   title: 'r3fresh',
+  //   description: 'Full-stack agent lifecycle management platform: Python SDK on PyPI for AI agent telemetry, FastAPI on Railway, Supabase/PostgreSQL event-driven architecture, Next.js dashboard with AI assistant, and Stripe subscriptions.',
+  //   thumbnail: 'https://i.imgur.com/4I2oRwp.png',
+  //   tags: ['Python', 'Web Development'] as ProjectTag[],
+  //   path: '/r3fresh',
+  //   year: 2025,
+  //   status: 'In Progress' as ProjectStatus,
+  //   highlights: ['Under development']
+  // },
   {
     id: 'stoc-ai',
     title: 'STOC AI',

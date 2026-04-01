@@ -19,7 +19,7 @@ import ValorantLoadoutOptimizer from './pages/projects/ValorantLoadoutOptimizer'
 import PolkaDotGame from './pages/projects/PolkaDotGame';
 import Neurochess from './pages/projects/Neurochess';
 import TetriUs from './pages/projects/TetriUs';
-import R3fresh from './pages/projects/R3fresh';
+// import R3fresh from './pages/projects/R3fresh';
 import StocAIPage from './pages/projects/StocAI';
 import './styles/global.css';
 import 'nprogress/nprogress.css';
@@ -42,7 +42,7 @@ function AppRoutes() {
       <Route path="/" element={<HomePage />} />
       <Route path="/resume" element={<ResumePage />} />
       <Route path="/projects" element={<ProjectsPage />} />
-      <Route path="/r3fresh" element={<R3fresh />} />
+      {/* <Route path="/r3fresh" element={<R3fresh />} /> */}
       <Route path="/stoc-ai" element={<StocAIPage />} />
       <Route path="/chess-analysis" element={<ChessAnalysis />} />
       <Route path="/snake-game" element={<SnakeGame />} />
